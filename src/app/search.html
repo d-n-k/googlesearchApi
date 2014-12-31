@@ -1,0 +1,14 @@
+<div class="photos-page" ng-controller="SearchCtrl as ctrl">
+    <p>{{ctrl.displayText}}</p>
+
+    <form ng-submit="ctrl.search()">
+        <input class="tags-input" ng-model="ctrl.tags"/>
+        <input class="search-submit" type="submit" value="go"/>
+    </form>
+    <ul class="photos">
+        <li class="link" ng-repeat="photo in ctrl.photos">
+            <p class="photos-title">{{ photo.title || "(EMPTY)" }}</p>
+            <img ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_{{ctrl.size}}.jpg"/>
+        </li>
+    </ul>
+</div>
