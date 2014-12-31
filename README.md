@@ -16,7 +16,7 @@ Starter project that builds web apps using browserify and gulp
 
 Install nodejs http://nodejs.org/
 
-    git clone https://github.com/daniran/browserify-gulp-angular-app
+    git clone https://github.com/SimilarWeb/angular-browserify-gulp-starter.git
     cd browserify-gulp-angular-app
     npm install   
     npm install -g bower
