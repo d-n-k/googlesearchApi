@@ -1,5 +1,6 @@
-<div class="photos-page" ng-controller="SearchCtrl as ctrl">
+<div class="photos-page" ng-controller="OwnerCtrl as ctrl">
     <p>{{ctrl.displayText}}</p>
+    <p>Owner</p>
 
     <form ng-submit="ctrl.search()">
         <input class="tags-input" ng-model="ctrl.tags"/>
@@ -7,13 +8,13 @@
     </form>
     <div class="radio">
         <label>
-            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+            <input type="radio" name="optionsRadios" id="optionsRadios3" value="option1">
             Search by Photos
         </label>
     </div>
     <div class="radio">
         <label>
-            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+            <input type="radio" name="optionsRadios" id="optionsRadios4" value="option2" checked>
             Search by Owner ID
         </label>
     </div>

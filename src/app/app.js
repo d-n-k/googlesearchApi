@@ -10,6 +10,10 @@ app.config(function($routeProvider) {
     $routeProvider.when('/search/:tag', {
         templateUrl: 'search.html'
     })
+    .when('/owner/:id', {
+        templateUrl: 'owner.html'
+
+    })
     .otherwise({
         redirectTo: '/search/forest'
     });
@@ -17,7 +21,7 @@ app.config(function($routeProvider) {
 
 app.constant('FlickrApiKey', function() {
     'use strict';
-    return '197e87889cad7c709f54b583d9690a4f';
+    return 'cb9d94cde1c29815cd5a842c26496123';
 });
 
 //NOTE Be sure to precede every function exported and added to this module with /* @ngInject */
@@ -26,4 +30,6 @@ app.constant('FlickrApiKey', function() {
 //If this is not done, AngularJs' dependency injection will fail on minified builds
 //See https://docs.angularjs.org/tutorial/step_05#a-note-on-minification
 app.factory('FlickrService', require('./services/flickr-service'));
+app.factory('FlickrServiceById', require('./services/flickr-service-byID'));
 app.controller('SearchCtrl', require('./controllers/search-ctrl'));
+app.controller('OwnerCtrl', require('./controllers/owner-ctrl'));

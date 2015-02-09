@@ -12,7 +12,7 @@ module.exports = function FlickService($resource, FlickrApiKey) {
             'search': {
                 method: 'GET',
                 params: {
-                    method: 'flickr.photos.search'
+                    method: 'flickr.people.getPublicPhotos'
                 },
                 interceptor: {
                     'response': function (response) {

@@ -11,6 +11,11 @@ $input-height: 40px;
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     font-size: 2em;
+    display: block;
+  }
+  a {
+    display: block;
+    font-size: 1em;
   }
 
   .tags-input {

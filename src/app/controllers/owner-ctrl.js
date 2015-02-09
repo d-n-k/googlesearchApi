@@ -1,17 +1,15 @@
 /* @ngInject */
-module.exports = function SearchCtrl($http, $route, FlickrService, FlickrServiceById, $location) {
+module.exports = function OwnerCtrl($http, $route,FlickrService,FlickrServiceById, $location) {
     'use strict';
     var vm = this;
     vm.displayText = 'Flickr Photos';
-    vm.tags = $route.current.params.tag;
+    vm.tags = $route.current.params.tags;
     vm.size = 'm';
-    console.log('searchCTRL');
-    console.log($route.current.params.tag);
-    console.log(document.getElementById('optionsRadios1').checked);
+    console.log('ownerCTRL');
+    console.log($route.current.params.tags);
 
     vm.search = function () {
-
-        if (document.getElementById('optionsRadios1').checked) {
+if (document.getElementById('optionsRadios3').checked) {
             FlickrService.search({ tags: vm.tags }, function (data) {
                 vm.photos = data.photos.photo;
             });
@@ -26,7 +24,7 @@ module.exports = function SearchCtrl($http, $route, FlickrService, FlickrService
             $location.path('/owner/'+ vm.tags);
         }
     };
-
     vm.search();
+    console.log(vm.photosO);
 
 };
