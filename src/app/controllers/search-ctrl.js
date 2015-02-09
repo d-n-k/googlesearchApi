@@ -1,5 +1,5 @@
 /* @ngInject */
-module.exports = function SearchCtrl($http, $route, FlickrService, FlickrServiceById, $location) {
+module.exports = function SearchCtrl($http, $route, FlickrService, $location) {
     'use strict';
     var vm = this;
     vm.displayText = 'Flickr Photos';
@@ -8,19 +8,20 @@ module.exports = function SearchCtrl($http, $route, FlickrService, FlickrService
     vm.id = $route.current.params.id;
     console.log('searchCTRL');
     console.log($route.current.params.tag);
+    console.log($route.current.params.tag);
     console.log(document.getElementById('optionsRadios1').checked);
 
     vm.search = function () {
 
         if (document.getElementById('optionsRadios1').checked) {
-            FlickrService.search({ tags: vm.tags }, function (data) {
+            FlickrService.res('flickr.photos.search').search({ tags: vm.tags }, function (data) {
                 vm.photos = data.photos.photo;
             });
             // URL update
             $location.path('/search/'+ vm.tags);
         }
         else {
-            FlickrServiceById.search({ user_id: vm.id }, function (data) {
+            FlickrService.res('flickr.people.getPublicPhotos').search({ user_id: vm.id }, function (data) {
                 vm.photos = data.photos.photo;
             });
             // URL update

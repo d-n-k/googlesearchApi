@@ -22,7 +22,7 @@
         <li class="link" ng-repeat="photo in ctrl.photos">
             <p class="photos-title">{{ photo.title || "(EMPTY)" }}</p>
             <img ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_{{ctrl.size}}.jpg"/>
-            <a class="id-owner" ng-href="/owner/{{photo.owner}}">{{photo.owner}}</a>
+            <a class="id-owner" ng-href="#/owner/{{photo.owner}}">{{photo.owner}}</a>
         </li>
     </ul>
 </div>

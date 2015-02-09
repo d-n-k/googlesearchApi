@@ -30,6 +30,6 @@ app.constant('FlickrApiKey', function() {
 //If this is not done, AngularJs' dependency injection will fail on minified builds
 //See https://docs.angularjs.org/tutorial/step_05#a-note-on-minification
 app.factory('FlickrService', require('./services/flickr-service'));
-app.factory('FlickrServiceById', require('./services/flickr-service-byID'));
+// app.factory('FlickrServiceById', require('./services/flickr-service-byID'));
 app.controller('SearchCtrl', require('./controllers/search-ctrl'));
 app.controller('OwnerCtrl', require('./controllers/owner-ctrl'));

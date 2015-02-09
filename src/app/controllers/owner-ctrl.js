@@ -1,5 +1,5 @@
 /* @ngInject */
-module.exports = function OwnerCtrl($http, $route,FlickrService,FlickrServiceById, $location) {
+module.exports = function OwnerCtrl($http, $route,FlickrService, $location) {
     'use strict';
     var vm = this;
     vm.displayText = 'Flickr Photos';
@@ -11,14 +11,14 @@ module.exports = function OwnerCtrl($http, $route,FlickrService,FlickrServiceByI
 
     vm.search = function () {
 if (document.getElementById('optionsRadios3').checked) {
-            FlickrService.search({ tags: vm.tags }, function (data) {
+            FlickrService.res('flickr.photos.search').search({ tags: vm.tags }, function (data) {
                 vm.photos = data.photos.photo;
             });
             // URL update
             $location.path('/search/'+ vm.tags);
         }
         else {
-            FlickrServiceById.search({ user_id: vm.id }, function (data) {
+            FlickrService.res('flickr.people.getPublicPhotos').search({ user_id: vm.id }, function (data) {
                 vm.photos = data.photos.photo;
             });
             // URL update
