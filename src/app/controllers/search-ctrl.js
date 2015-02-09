@@ -5,6 +5,7 @@ module.exports = function SearchCtrl($http, $route, FlickrService, FlickrService
     vm.displayText = 'Flickr Photos';
     vm.tags = $route.current.params.tag;
     vm.size = 'm';
+    vm.id = $route.current.params.id;
     console.log('searchCTRL');
     console.log($route.current.params.tag);
     console.log(document.getElementById('optionsRadios1').checked);
@@ -19,7 +20,7 @@ module.exports = function SearchCtrl($http, $route, FlickrService, FlickrService
             $location.path('/search/'+ vm.tags);
         }
         else {
-            FlickrServiceById.search({ user_id: vm.tags }, function (data) {
+            FlickrServiceById.search({ user_id: vm.id }, function (data) {
                 vm.photos = data.photos.photo;
             });
             // URL update

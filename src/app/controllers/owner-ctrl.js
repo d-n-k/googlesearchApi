@@ -4,9 +4,10 @@ module.exports = function OwnerCtrl($http, $route,FlickrService,FlickrServiceByI
     var vm = this;
     vm.displayText = 'Flickr Photos';
     vm.tags = $route.current.params.tags;
+    vm.id = $route.current.params.id;
     vm.size = 'm';
     console.log('ownerCTRL');
-    console.log($route.current.params.tags);
+    console.log($route.current.params.id);
 
     vm.search = function () {
 if (document.getElementById('optionsRadios3').checked) {
@@ -17,11 +18,11 @@ if (document.getElementById('optionsRadios3').checked) {
             $location.path('/search/'+ vm.tags);
         }
         else {
-            FlickrServiceById.search({ user_id: vm.tags }, function (data) {
+            FlickrServiceById.search({ user_id: vm.id }, function (data) {
                 vm.photos = data.photos.photo;
             });
             // URL update
-            $location.path('/owner/'+ vm.tags);
+            $location.path('/owner/'+ vm.id);
         }
     };
     vm.search();
