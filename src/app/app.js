@@ -15,7 +15,7 @@ app.config(function($routeProvider) {
 
     })
     .otherwise({
-        redirectTo: '/search/forest'
+        redirectTo: '/search/ '
     });
 });
 

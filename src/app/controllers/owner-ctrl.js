@@ -1,11 +1,14 @@
 /* @ngInject */
-module.exports = function OwnerCtrl($http, $route,FlickrService, $location) {
+module.exports = function OwnerCtrl($http, $route,FlickrService, $location, $scope) {
     'use strict';
     var vm = this;
     vm.displayText = 'Flickr Photos';
     vm.tags = $route.current.params.tags;
     vm.id = $route.current.params.id;
     vm.size = 'm';
+    $scope.toggle = function() {
+        $scope.table = !$scope.table;
+    };
     console.log('ownerCTRL');
     console.log($route.current.params.id);
 
@@ -26,6 +29,6 @@ if (document.getElementById('optionsRadios3').checked) {
         }
     };
     vm.search();
-    console.log(vm.photosO);
+
 
 };

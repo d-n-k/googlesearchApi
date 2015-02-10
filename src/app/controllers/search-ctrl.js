@@ -1,5 +1,5 @@
 /* @ngInject */
-module.exports = function SearchCtrl($http, $route, FlickrService, $location) {
+module.exports = function SearchCtrl($http, $route, FlickrService, $location, $scope) {
     'use strict';
     var vm = this;
     vm.displayText = 'Flickr Photos';
@@ -7,9 +7,9 @@ module.exports = function SearchCtrl($http, $route, FlickrService, $location) {
     vm.size = 'm';
     vm.id = $route.current.params.id;
     console.log('searchCTRL');
-    console.log($route.current.params.tag);
-    console.log($route.current.params.tag);
-    console.log(document.getElementById('optionsRadios1').checked);
+    $scope.toggle = function() {
+        $scope.table = !$scope.table;
+    };
 
     vm.search = function () {
 
