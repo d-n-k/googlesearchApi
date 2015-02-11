@@ -13,7 +13,7 @@ module.exports = function OwnerCtrl($http, $route,FlickrService, $location, $sco
     console.log($route.current.params.id);
 
     vm.search = function () {
-if (document.getElementById('optionsRadios3').checked) {
+    if (document.getElementById('optionsRadios3').checked) {
             FlickrService.res('flickr.photos.search').search({ tags: vm.tags }, function (data) {
                 vm.photos = data.photos.photo;
             });

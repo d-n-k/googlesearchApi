@@ -1,9 +1,10 @@
-<div class="photos-page" ng-controller="OwnerCtrl as ctrl">
+<div class="photos-page" ng-controller="SearchCtrl as ctrl">
     <p>{{ctrl.displayText}}</p>
+    <p>Owner</p>
     <form ng-submit="ctrl.search()">
         <input class="tags-input" ng-model="ctrl.tags"/>
         <input class="search-submit" type="submit" value="go"/>
-        <button type="button" class="btn btn-default" ng-click="toggle()"><i class="icon-table"></i> Table</button>
+        <button type="button" class="btn btn-default" ng-click="toggle()"><i class="icon-table"></i></button>
     </form>
     <div class="radio">
         <label>
