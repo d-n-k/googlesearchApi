@@ -10,10 +10,10 @@ module.exports = function SearchCtrl($http, $route, FlickrService, $location, $s
     console.log('searchCTRL');
     $scope.owner = ($location.path().indexOf('owner')>-1);
 
-    $scope.searchByTag = 'true';
+    $scope.searchByTag = true;
 
     $scope.searchHandler = function () {
-        $scope.searchByTag = !$scope.searchByTag;
+        $scope.searchByTag = false;
     };
 
 
@@ -33,6 +33,7 @@ module.exports = function SearchCtrl($http, $route, FlickrService, $location, $s
             $location.path('/search/'+ vm.tags);
         }
         else {
+            console.log($scope.searchByTag);
             FlickrService.res('flickr.people.getPublicPhotos').search({ user_id: vm.id }, function (data) {
                 vm.photos = data.photos.photo;
             });
@@ -41,7 +42,11 @@ module.exports = function SearchCtrl($http, $route, FlickrService, $location, $s
         }
     };
 
-    vm.search();
+    //vm.search();
+
+    $scope.openLightboxModal = function (index) {
+    Lightbox.openModal([{'url':'https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_{{ctrl.size}}.jpg'}], index);
+  };
 
 
 };

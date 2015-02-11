@@ -20,9 +20,6 @@
             </label>
         </div>
     </div>
-
-
-
     <ul class="photos" ng-hide="table">
         <li class="link" ng-repeat="photo in ctrl.photos">
             <p class="photos-title">{{ photo.title || "(EMPTY)" }}</p>
@@ -43,7 +40,7 @@
             <tbody>
                 <tr class="animate-repeat" ng-repeat="photo in ctrl.photos | filter:filter | orderBy:order:asc">
                     <td>{{$index+1}}</td>
-                    <td><a ng-click=""><img ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_{{ctrl.size}}.jpg"/></a></td>
+                    <td><a ng-click="openLightboxModal($index)"><img ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_{{ctrl.size}}.jpg"/></a></td>
                     <td><p class="photos-title">{{ photo.title || "(EMPTY)" }}</p></td>
                     <td><a class="id-owner" ng-href="#/owner/{{photo.owner}}">{{photo.owner}}</a></td>
                 </tr>
