@@ -12,11 +12,11 @@ app.config(function($routeProvider) {
         templateUrl: 'search.html'
     })
     .when('/owner/:id', {
-        templateUrl: 'owner.html'
+        templateUrl: 'search.html'
 
     })
     .otherwise({
-        redirectTo: '/search/ '
+        redirectTo: '/search/forest'
     });
 });
 

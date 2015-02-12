@@ -40,7 +40,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="animate-repeat" ng-repeat="photo in ctrl.photos | filter:filter | orderBy:order:asc">
+                <tr class="animate-repeat" ng-repeat="photo in ctrl.photos track by $index | orderBy:order:asc">
                     <td>{{$index+1}}</td>
                     <td><a ng-click="ctrl.openLightboxModal($index)">
                     <img ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_{{ctrl.size}}.jpg"/>
