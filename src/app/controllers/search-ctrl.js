@@ -7,45 +7,63 @@ module.exports = function SearchCtrl($http, $route, FlickrService, $location, $s
     vm.size = 'm';
     vm.sizeb = 'b';
     vm.id = $route.current.params.id;
-    console.log('searchCTRL');
-    $scope.owner = ($location.path().indexOf('owner')>-1);
+    vm.images = [];
+    vm.searchByTag = null;
 
-    $scope.searchByTag = true;
-
-    $scope.searchHandler = function () {
-        $scope.searchByTag = false;
-    };
-
-
-
-    $scope.toggle = function() {
+    //Toggle function for table/grid view
+    vm.toggle = function() {
         $scope.table = !$scope.table;
     };
 
     vm.search = function () {
-        console.log($scope.searchByTag);
-
         if ($scope.searchByTag) {
+            console.log($scope.searchByTag);
             FlickrService.res('flickr.photos.search').search({ tags: vm.tags }, function (data) {
                 vm.photos = data.photos.photo;
+                vm.imagesArr(vm.photos);
             });
             // URL update
             $location.path('/search/'+ vm.tags);
         }
         else {
-            console.log($scope.searchByTag);
             FlickrService.res('flickr.people.getPublicPhotos').search({ user_id: vm.id }, function (data) {
                 vm.photos = data.photos.photo;
+                vm.imagesArr(vm.photos);
             });
+
             // URL update
             $location.path('/owner/'+ vm.tags);
         }
     };
 
-    //vm.search();
+    vm.init = function() {
+        if(vm.tags) {
+            FlickrService.res('flickr.photos.search').search({ tags: vm.tags }, function (data) {
+                vm.photos = data.photos.photo;
+                vm.imagesArr(vm.photos);
+            });
+        }
+        if(vm.id) {
+            FlickrService.res('flickr.people.getPublicPhotos').search({ user_id: vm.id }, function (data) {
+                vm.photos = data.photos.photo;
+                vm.imagesArr(vm.photos);
+            });
+        }
+    };
+    vm.init();
 
-    $scope.openLightboxModal = function (index) {
-    Lightbox.openModal([{'url':'https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_{{ctrl.size}}.jpg'}], index);
+    //Creating images array for lightbox plugin
+    vm.imagesArr = function(photos) {
+        for(var photo in photos) {
+            vm.images.push({'url':'https://farm'+photos[photo].farm+'.staticflickr.com/'+
+                photos[photo].server+'/'+photos[photo].id+'_'+photos[photo].secret+'_'+
+                vm.sizeb+'.jpg'});
+        }
+    };
+    //Lightbox plugin initiation
+    //
+    vm.openLightboxModal = function (index) {
+    Lightbox.openModal(vm.images, index);
   };
 
 

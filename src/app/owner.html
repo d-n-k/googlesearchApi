@@ -4,26 +4,28 @@
     <form ng-submit="ctrl.search()">
         <input class="tags-input" ng-model="ctrl.tags"/>
         <input class="search-submit" type="submit" value="go"/>
-        <button type="button" class="btn btn-default" ng-click="toggle()"><i class="icon-table"></i> </button>
+        <button type="button" class="btn btn-default" ng-click="ctrl.toggle()"><i class="icon-table"></i> </button>
     </form>
-    <div class="" ng-init="searchByTag = 'true'">
+    <div class="">
         <div class="radio">
-            <label>
+            <label ng-init="searchByTag = 'true'">
                 <input  type="radio" ng-model = "searchByTag" value="true" id="optionsRadios1">
-                Search by Tags {{searchByTag}}
+                Search by Tags
             </label>
         </div>
         <div class="radio">
             <label>
-                <input  type="radio" ng-model = "searchByTag" value="false" ng-change = "searchHandler()" id="optionsRadios2" checked>
-                Search by Owner ID {{searchByTag}}
+                <input  type="radio" ng-model = "searchByTag" value="" id="optionsRadios2" checked>
+                Search by Owner ID
             </label>
         </div>
     </div>
     <ul class="photos" ng-hide="table">
         <li class="link" ng-repeat="photo in ctrl.photos">
             <p class="photos-title">{{ photo.title || "(EMPTY)" }}</p>
-            <img ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_{{ctrl.size}}.jpg"/>
+            <a ng-click="ctrl.openLightboxModal($index)">
+                <img ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_{{ctrl.size}}.jpg"/>
+            </a>
             <a class="id-owner" ng-href="#/owner/{{photo.owner}}">{{photo.owner}}</a>
         </li>
     </ul>
@@ -40,7 +42,9 @@
             <tbody>
                 <tr class="animate-repeat" ng-repeat="photo in ctrl.photos | filter:filter | orderBy:order:asc">
                     <td>{{$index+1}}</td>
-                    <td><a ng-click=""><img ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_{{ctrl.size}}.jpg"/></a></td>
+                    <td><a ng-click="ctrl.openLightboxModal($index)">
+                    <img ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_{{ctrl.size}}.jpg"/>
+                    </a></td>
                     <td><p class="photos-title">{{ photo.title || "(EMPTY)" }}</p></td>
                     <td><a class="id-owner" ng-href="#/owner/{{photo.owner}}">{{photo.owner}}</a></td>
                 </tr>
