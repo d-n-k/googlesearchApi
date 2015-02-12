@@ -24,7 +24,7 @@
         <li class="link" ng-repeat="photo in ctrl.photos">
             <p class="photos-title">{{ photo.title || "(EMPTY)" }}</p>
             <a ng-click="ctrl.openLightboxModal($index)">
-                <img ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_{{ctrl.size}}.jpg"/>
+                <img style="cursor: pointer" ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_{{ctrl.size}}.jpg"/>
             </a>
             <a class="id-owner" ng-href="#/owner/{{photo.owner}}">{{photo.owner}}</a>
         </li>
@@ -33,8 +33,8 @@
         <table class="table table-hover">
             <thead>
                 <tr ng-init="order = 'name'; asc = false">
-                    <th style="cursor: pointer">Index</th>
-                    <th style="cursor: pointer">Thumbnail</th>
+                    <th>Index</th>
+                    <th>Thumbnail</th>
                     <th style="cursor: pointer" ng-click="order = 'title'; asc = asc ? false : true">Title <i ng-show="order == 'title'" class=" icon-angle-{{asc ? 'down' : 'up'}}"></i></th>
                     <th style="cursor: pointer" ng-click="order = 'owner'; asc = asc ? false : true">Owner<i ng-show="order == 'owner'" class=" icon-angle-{{asc ? 'down' : 'up'}}"></i></th>
                 </tr>
@@ -43,7 +43,7 @@
                 <tr class="animate-repeat" ng-repeat="photo in ctrl.photos track by $index | orderBy:order:asc">
                     <td>{{$index+1}}</td>
                     <td><a ng-click="ctrl.openLightboxModal($index)">
-                    <img ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_{{ctrl.size}}.jpg"/>
+                    <img style="cursor: pointer" ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_{{ctrl.size}}.jpg"/>
                     </a></td>
                     <td><p class="photos-title">{{ photo.title || "(EMPTY)" }}</p></td>
                     <td><a class="id-owner" ng-href="#/owner/{{photo.owner}}">{{photo.owner}}</a></td>
