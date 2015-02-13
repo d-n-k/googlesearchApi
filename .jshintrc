@@ -16,8 +16,8 @@
   "strict": true,
   "trailing": true,
   "smarttabs": true,
+  "camelcase": false,
   "globals": {
     "angular": true
   }
-  "camelcase": false
 }

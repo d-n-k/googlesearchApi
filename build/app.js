@@ -56,7 +56,7 @@ module.exports = function SearchCtrl($http, $route, FlickrService, $location, $s
         $scope.table = !$scope.table;
     };
 
-    // Creating images array for lightbox plugin
+    // Creating images array for the Lightbox plugin
     vm.imagesArr = function(photos) {
         angular.forEach(photos, function(obj) {
             obj.url='https://farm'+obj.farm+'.staticflickr.com/'+
@@ -65,7 +65,7 @@ module.exports = function SearchCtrl($http, $route, FlickrService, $location, $s
         });
     };
 
-    // Filter Function for the array that solves Lightbox problem
+    // Filter Function for the array that solves Lightbox problem on orderBy
     vm.filterFunc = function(orderBy,asc) {
         vm.photos=$filter('orderBy')(vm.photos,orderBy,asc);
         vm.asc = !vm.asc;
