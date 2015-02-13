@@ -20,6 +20,7 @@
             </label>
         </div>
     </div>
+
     <ul class="photos" ng-hide="table">
         <li class="link" ng-repeat="photo in ctrl.photos">
             <p class="photos-title">{{ photo.title || "(EMPTY)" }}</p>
@@ -29,18 +30,19 @@
             <a class="id-owner" ng-href="#/owner/{{photo.owner}}">{{photo.owner}}</a>
         </li>
     </ul>
+
     <div class="col-md-12 table-responsive" ng-show="table">
         <table class="table table-hover">
             <thead>
-                <tr ng-init="order = 'name'; asc = false">
+                <tr>
                     <th>Index</th>
                     <th>Thumbnail</th>
-                    <th style="cursor: pointer" ng-click="order = 'title'; asc = asc ? false : true">Title <i ng-show="order == 'title'" class=" icon-angle-{{asc ? 'down' : 'up'}}"></i></th>
-                    <th style="cursor: pointer" ng-click="order = 'owner'; asc = asc ? false : true">Owner<i ng-show="order == 'owner'" class=" icon-angle-{{asc ? 'down' : 'up'}}"></i></th>
+                    <th style="cursor: pointer" ng-click="ctrl.filterFunc('title',ctrl.asc)">Title <i ng-show="ctrl.order == 'title'" class=" icon-angle-{{ctrl.asc ? 'down' : 'up'}}"></i></th>
+                    <th style="cursor: pointer" ng-click="ctrl.filterFunc('owner',ctrl.asc)">Owner<i ng-show="order == 'owner'" class=" icon-angle-{{asc ? 'down' : 'up'}}"></i></th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="animate-repeat" ng-repeat="photo in ctrl.photos track by $index | orderBy:order:asc">
+                <tr class="animate-repeat" ng-repeat="photo in ctrl.photos">
                     <td>{{$index+1}}</td>
                     <td><a ng-click="ctrl.openLightboxModal($index)">
                     <img style="cursor: pointer" ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_{{ctrl.size}}.jpg"/>

@@ -32,4 +32,4 @@ app.constant('FlickrApiKey', function() {
 //See https://docs.angularjs.org/tutorial/step_05#a-note-on-minification
 app.factory('FlickrService', require('./services/flickr-service'));
 app.controller('SearchCtrl', require('./controllers/search-ctrl'));
-// app.controller('OwnerCtrl', require('./controllers/owner-ctrl'));
+

@@ -17,5 +17,7 @@
   "trailing": true,
   "smarttabs": true,
   "globals": {
+    "angular": true
   }
+  "camelcase": false
 }
