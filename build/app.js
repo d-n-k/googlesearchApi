@@ -9,21 +9,17 @@ var app = angular.module('app', [
 
 app.config(function($routeProvider) {
     'use strict';
-    $routeProvider.when('/search/:tag', {
+    $routeProvider.when('/search/', {
         templateUrl: 'search.html'
-    })
-    .when('/owner/:id', {
-        templateUrl: 'search.html'
-
     })
     .otherwise({
-        redirectTo: '/search/forest'
+        redirectTo: '/search'
     });
 });
 
 app.constant('FlickrApiKey', function() {
     'use strict';
-    return 'cb9d94cde1c29815cd5a842c26496123';
+    return '';
 });
 
 //NOTE Be sure to precede every function exported and added to this module with /* @ngInject */
@@ -31,100 +27,61 @@ app.constant('FlickrApiKey', function() {
 //because comprehending and traversing the browserify-ed commonJS modules is beyond the scope of ng-annotate
 //If this is not done, AngularJs' dependency injection will fail on minified builds
 //See https://docs.angularjs.org/tutorial/step_05#a-note-on-minification
-app.factory('FlickrService', require('./services/flickr-service'));
+app.factory('googleService', require('./services/search-service'));
 app.controller('SearchCtrl', require('./controllers/search-ctrl'));
 
 
-},{"./controllers/search-ctrl":"C:\\test\\angular-browserify-gulp-starter\\src\\app\\controllers\\search-ctrl.js","./services/flickr-service":"C:\\test\\angular-browserify-gulp-starter\\src\\app\\services\\flickr-service.js"}],"C:\\test\\angular-browserify-gulp-starter\\src\\app\\controllers\\search-ctrl.js":[function(require,module,exports){
+},{"./controllers/search-ctrl":"C:\\test\\search - angular\\src\\app\\controllers\\search-ctrl.js","./services/search-service":"C:\\test\\search - angular\\src\\app\\services\\search-service.js"}],"C:\\test\\search - angular\\src\\app\\controllers\\search-ctrl.js":[function(require,module,exports){
 /* @ngInject */
-module.exports = function SearchCtrl($http, $route, FlickrService, $location, $scope, Lightbox, $filter) {
+module.exports = function SearchCtrl($http, googleService) {
     'use strict';
     var vm = this;
+    vm.displayText = 'Google Search';
+    vm.query = '';
+    vm.searchArray = {};
 
-    vm.displayText = 'Flickr Photos';
-    vm.tags = $route.current.params.tag;
-    vm.size = 'm';
-    vm.sizeb = 'b';
-    vm.id = $route.current.params.id;
-    vm.images = [];
-    vm.searchByTag = null;
-    vm.order = null;
-    vm.asc = 'true';
 
-    //  Toggle function for table/grid view
-    vm.toggle = function() {
-        $scope.table = !$scope.table;
-    };
-
-    // Creating images array for the Lightbox plugin
-    vm.imagesArr = function(photos) {
-        angular.forEach(photos, function(obj) {
-            obj.url='https://farm'+obj.farm+'.staticflickr.com/'+
-                obj.server+'/'+obj.id+'_'+obj.secret+'_'+
-                vm.sizeb+'.jpg';
-        });
-    };
-
-    // Filter Function for the array that solves Lightbox problem on orderBy
-    vm.filterFunc = function(orderBy,asc) {
-        vm.photos=$filter('orderBy')(vm.photos,orderBy,asc);
-        vm.asc = !vm.asc;
-        vm.order = orderBy;
-    };
-
-    //  Lightbox plugin initiation
-    //
-    vm.openLightboxModal = function (index) {
-    Lightbox.openModal(vm.photos, index);
-  };
-    // Views changes Search function
+    // Search function
     vm.search = function () {
-        $location.path($scope.searchByTag ? '/search/'+ vm.tags : '/owner/'+ vm.tags);
-    };
-
-    // Search function after view change
-    vm.init = function() {
-        FlickrService.res(vm.tags ? 'flickr.photos.search' : 'flickr.people.getPublicPhotos')
-        .search(vm.tags ? { tags: vm.tags } : { user_id: vm.id }, function (data) {
-            vm.photos = data.photos.photo;
-            vm.imagesArr(vm.photos);
+        googleService.res()
+        .search({ query: vm.query }, function (result) {
+            vm.searchArray = result;
+            console.log(vm.searchArray);
+            console.log(result);
         });
     };
-    vm.init();
+
+
 
 
 };
 
-},{}],"C:\\test\\angular-browserify-gulp-starter\\src\\app\\services\\flickr-service.js":[function(require,module,exports){
+},{}],"C:\\test\\search - angular\\src\\app\\services\\search-service.js":[function(require,module,exports){
 /* @ngInject */
-module.exports = function FlickService($resource, FlickrApiKey) {
+module.exports = function googleService($resource) {
     'use strict';
 
     return {
-        res: function (method) {
-            console.log(method);
-            return $resource('https://api.flickr.com/services/rest/',
+        res: function () {
+
+            return $resource('https://www.googleapis.com/freebase/v1/search',
                 {
-                    format: 'json',
-                    api_key: FlickrApiKey,
-                    nojsoncallback: 1
+                    // key: ''
                 },
                 {
                     'search': {
                         method: 'GET',
-                        params: {
-                            method: method
-                        },
                         interceptor: {
                             'response': function (response) {
+                                console.log(response);
                                 // look at 'stat'
-                                switch (response.data.stat) {
+                                switch (response.statusText) {
                                     case 'fail':
-                                        console.error('FlickService error: %s', response.data.message);
-                                        return { photos: { photo: {} } };
-                                    case 'ok':
-                                        console.log(response.data);
-                                        return response.data;
+                                        console.error('GoogleService error: %s', response.data.message);
+                                        return {};
+                                    case 'OK':
+                                        console.log(response.data.result);
+                                        return response.data.result;
 
                                 }
 

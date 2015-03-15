@@ -1,15 +1,18 @@
-.photos-page {
+.title {
+  margin: 0 0 0 1%; }
+
+.container-fluid {
+  margin-top: 20px; }
+
+.page {
   padding: 20px;
   overflow: auto; }
-  .photos-page p {
+  .page p {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
-    font-size: 2em;
+    font-size: 1em;
     display: block; }
-  .photos-page a {
-    display: block;
-    font-size: 1em; }
-  .photos-page .btn {
+  .page .btn {
     display: inline-block;
     font-family: 'Open Sans', sans-serif;
     vertical-align: top;
@@ -17,46 +20,18 @@
     font-size: 1.5em;
     padding: 0 10px;
     border-radius: 5px;
-    height: 40px;
-    line-height: 40px; }
-  .photos-page .tags-input {
+    height: 30px;
+    line-height: 30px; }
+  .page .tags-input {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     font-size: 1.5em;
     text-indent: 5px;
-    height: 40px;
-    line-height: 40px;
+    height: 30px;
+    line-height: 30px;
     width: 300px;
     border-radius: 5px;
     border: 1px solid rgba(128, 128, 128, 0.55); }
-  .photos-page .search-submit {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    font-size: 1.5em;
-    border: none;
-    cursor: pointer;
-    padding: 0 10px;
-    border-radius: 5px;
-    height: 40px;
-    line-height: 40px;
-    width: 60px;
-    background-color: #6e91ff;
-    color: white; }
-  .photos-page .photos {
-    list-style: none;
-    overflow: auto;
-    margin: 0;
-    padding: 0; }
-    .photos-page .photos .photos-title {
-      width: 300px;
-      height: 40px;
-      font-family: 'Open Sans', sans-serif;
-      font-weight: 300;
-      font-size: 1em; }
-    .photos-page .photos li {
-      float: left;
-      width: 300px;
-      height: 350px; }
 
 /*!
  * Bootstrap v3.3.0 (http://getbootstrap.com)
@@ -888,7 +863,7 @@ html {
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 11px;
   line-height: 1.42857;
   color: #333;
   background-color: #fff; }
